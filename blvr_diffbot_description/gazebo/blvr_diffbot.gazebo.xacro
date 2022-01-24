@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="blvr_diffbot_gazebo" params="prefix">
+
+  <!-- =============== Gazebo =============== -->
+  <gazebo>
+    <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+      <parameters>$(find blvr_diffbot_description)/config/blvr_diffbot_sim.yaml</parameters>
+    </plugin>
+  </gazebo>
+
+  </xacro:macro>
+
+</robot>

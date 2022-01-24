@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!-- Basic differential drive mobile base -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="blvr_diffbot">
+  <xacro:arg name="prefix" default="" />
+  <xacro:arg name="use_sim" default="false" />
+  
+  <xacro:include filename="$(find blvr_diffbot_description)/robots/blvr_diffbot_description.urdf.xacro" />
+
+  <xacro:include filename="$(find blvr_diffbot_description)/gazebo/blvr_diffbot.gazebo.xacro" />
+
+  <!-- Import blvr_diffbot ros2_control description -->
+  <xacro:include filename="$(find blvr_diffbot_description)/ros2_control/blvr_diffbot.ros2_control.xacro" />
+
+  <xacro:blvr_diffbot prefix="$(arg prefix)" use_sim="$(arg use_sim)"/>
+  <xacro:blvr_diffbot_gazebo prefix="$(arg prefix)" />
+
+  <xacro:blvr_diffbot_ros2_control
+    name="blvr_diffbot" prefix="$(arg prefix)" use_sim="$(arg use_sim)" />
+    
+</robot>

@@ -1,0 +1,49 @@
+FROM ros:galactic
+
+ENV DEBIAN_FRONTEND noninteractive
+
+# install dependencies via apt
+ENV DEBCONF_NOWARNINGS yes
+RUN set -x && \
+  apt-get update -y -qq && \
+  apt-get upgrade -y -qq --no-install-recommends && \
+  apt-get install -y -qq \
+    libyaml-cpp-dev \
+    vim v4l-utils exfat-* \
+    openssh-server \
+    terminator dbus-x11 \
+    python3-pip && \
+  : "remove cache" && \
+  apt-get autoremove -y -qq && \
+  rm -rf /var/lib/apt/lists/*
+
+# for ros2
+RUN apt-get update && apt-get install -q -y --no-install-recommends \
+    dirmngr \
+    gnupg2 \
+    lsb-release \
+    python3-colcon-ros \
+    && apt-get clean
+
+RUN set -x && \
+  apt-get update -y -qq && \
+  apt-get install -y -qq ros-galactic-desktop \
+    ros-galactic-ament-cmake ros-galactic-angles ros-galactic-controller-manager \
+    ros-galactic-gazebo-dev ros-galactic-gazebo-ros-pkgs \
+    ros-galactic-pluginlib ros-galactic-urdf ros-galactic-yaml-cpp-vendor ros-galactic-joint-state-publisher-gui && \
+  apt-get install -y -qq ros-galactic-xacro ros-galactic-realtime-tools ros-galactic-control-toolbox && \
+  : "remove cache" && \
+  apt-get autoremove -y -qq && \
+  rm -rf /var/lib/apt/lists/*
+
+RUN set -x && \
+  apt-get update -y -qq && \
+  apt-get install -y -qq ros-galactic-urg-node ros-galactic-navigation2 ros-galactic-slam-toolbox && \
+  : "remove cache" && \
+  apt-get autoremove -y -qq && \
+  rm -rf /var/lib/apt/lists/*
+
+ENV NVIDIA_VISIBLE_DEVICES ${NVIDIA_VISIBLE_DEVICES:-all}
+ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPABILITIES,}graphics
+
+ENTRYPOINT ["/bin/bash"]
