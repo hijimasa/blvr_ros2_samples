@@ -190,7 +190,7 @@ CallbackReturn BlvrDiffbotSystemHardware::on_deactivate(
   return CallbackReturn::SUCCESS;
 }
 
-hardware_interface::return_type BlvrDiffbotSystemHardware::read()
+hardware_interface::return_type BlvrDiffbotSystemHardware::read(const rclcpp::Time & time, const rclcpp::Duration & period)
 {
   RCLCPP_INFO(rclcpp::get_logger("BlvrDiffbotSystemHardware"), "Reading...");
 
@@ -235,7 +235,7 @@ hardware_interface::return_type BlvrDiffbotSystemHardware::read()
   return hardware_interface::return_type::OK;
 }
 
-hardware_interface::return_type BlvrDiffbotSystemHardware::write()
+hardware_interface::return_type BlvrDiffbotSystemHardware::write(const rclcpp::Time & time, const rclcpp::Duration & period)
 {
   RCLCPP_INFO(rclcpp::get_logger("BlvrDiffbotSystemHardware"), "Writing...");
 

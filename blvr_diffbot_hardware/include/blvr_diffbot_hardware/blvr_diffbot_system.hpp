@@ -56,10 +56,10 @@ public:
   CallbackReturn on_deactivate(const rclcpp_lifecycle::State & previous_state) override;
 
   BLVR_DIFFBOT_HARDWARE_PUBLIC
-  hardware_interface::return_type read() override;
+  hardware_interface::return_type read(const rclcpp::Time & time, const rclcpp::Duration & period) override;
 
   BLVR_DIFFBOT_HARDWARE_PUBLIC
-  hardware_interface::return_type write() override;
+  hardware_interface::return_type write(const rclcpp::Time & time, const rclcpp::Duration & period) override;
   
   rclcpp::Duration getPeriod() const { return rclcpp::Duration(0, 100000000); } // loop period is 0.1s
 
