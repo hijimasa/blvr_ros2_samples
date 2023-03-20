@@ -1,4 +1,4 @@
-FROM ros:galactic
+FROM ros:humble
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -27,18 +27,18 @@ RUN apt-get update && apt-get install -q -y --no-install-recommends \
 
 RUN set -x && \
   apt-get update -y -qq && \
-  apt-get install -y -qq ros-galactic-desktop \
-    ros-galactic-ament-cmake ros-galactic-angles ros-galactic-controller-manager \
-    ros-galactic-gazebo-dev ros-galactic-gazebo-ros-pkgs \
-    ros-galactic-pluginlib ros-galactic-urdf ros-galactic-yaml-cpp-vendor ros-galactic-joint-state-publisher-gui && \
-  apt-get install -y -qq ros-galactic-xacro ros-galactic-realtime-tools ros-galactic-control-toolbox && \
+  apt-get install -y -qq ros-humble-desktop \
+    ros-humble-ament-cmake ros-humble-angles ros-humble-controller-manager \
+    ros-humble-gazebo-dev ros-humble-gazebo-ros-pkgs \
+    ros-humble-pluginlib ros-humble-urdf ros-humble-yaml-cpp-vendor ros-humble-joint-state-publisher-gui && \
+  apt-get install -y -qq ros-humble-xacro ros-humble-realtime-tools ros-humble-control-toolbox && \
   : "remove cache" && \
   apt-get autoremove -y -qq && \
   rm -rf /var/lib/apt/lists/*
 
 RUN set -x && \
   apt-get update -y -qq && \
-  apt-get install -y -qq ros-galactic-urg-node ros-galactic-navigation2 ros-galactic-slam-toolbox && \
+  apt-get install -y -qq ros-humble-urg-node ros-humble-navigation2 ros-humble-slam-toolbox && \
   : "remove cache" && \
   apt-get autoremove -y -qq && \
   rm -rf /var/lib/apt/lists/*
