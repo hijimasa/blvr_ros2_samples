@@ -118,36 +118,6 @@ def generate_launch_description():
         executable='velocity_pub',
     )
     
-    front_urg_node = Node(
-        package='urg_node',
-        name='front_urg_node',
-        executable='urg_node_driver',
-        remappings=[
-            ('scan', '/front_lrf/laserscan'),
-        ],
-        parameters=[front_urg_config],
-    )
-
-    rear_urg_node = Node(
-        package='urg_node',
-        name='rear_urg_node',
-        executable='urg_node_driver',
-        remappings=[
-            ('scan', '/rear_lrf/laserscan'),
-        ],
-        parameters=[rear_urg_config],
-    )
-
-    stop_daemon_node = Node(
-        package='stop_daemon',
-        executable='stop_daemon',
-        remappings=[
-            ('cmd_vel', '/cmd_vel_stamped'),
-            ("safety_cmd_vel", '/diff_drive_controller/cmd_vel'),
-            ("scan", '/front_lrf/laserscan'),
-        ],
-    )
-        
     return LaunchDescription([
         joy,
         teleop_joy_node,
@@ -157,7 +127,4 @@ def generate_launch_description():
         joint_state_broadcaster_spawner,
         diff_drive_controller_spawner,
         velocity_converter,
-        front_urg_node,
-        rear_urg_node,
-        stop_daemon_node,
     ])
