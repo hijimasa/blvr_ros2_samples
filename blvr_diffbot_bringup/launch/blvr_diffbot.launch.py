@@ -45,22 +45,6 @@ def generate_launch_description():
         ]
     )
 
-    front_urg_config = PathJoinSubstitution(
-        [
-            FindPackageShare("blvr_diffbot_bringup"),
-            "config",
-            "front_urg_config.yaml",
-        ]
-    )
-
-    rear_urg_config = PathJoinSubstitution(
-        [
-            FindPackageShare("blvr_diffbot_bringup"),
-            "config",
-            "rear_urg_config.yaml",
-        ]
-    )
-    
     joy = Node(
             package='joy',
             name='joy',
@@ -95,11 +79,6 @@ def generate_launch_description():
         parameters=[params]
     )
 
-    spawn_entity = Node(package='gazebo_ros', executable='spawn_entity.py',
-                        arguments=['-topic', 'robot_description',
-                                   '-entity', 'blvr_diffbot'],
-                        output='screen')
-
     joint_state_broadcaster_spawner = Node(
         package="controller_manager",
         executable="spawner",
@@ -123,7 +102,6 @@ def generate_launch_description():
         teleop_joy_node,
         control_node,
         node_robot_state_publisher,
-        spawn_entity,
         joint_state_broadcaster_spawner,
         diff_drive_controller_spawner,
         velocity_converter,
